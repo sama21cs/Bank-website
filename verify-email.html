@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+</head>
+
+<body>
+    <h1>Verifying Email...</h1>
+    <script>
+        // Extract the token from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        // Make a request to the backend to verify the email
+        fetch(`http://127.0.0.1:8000/verify-email/${token}/`)
+            .then(response => response.text())
+            .then(data => {
+                document.body.innerHTML = data;
+            })
+            .catch(error => {
+                document.body.innerHTML = 'An error occurred while verifying your email.';
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+
+</html>
